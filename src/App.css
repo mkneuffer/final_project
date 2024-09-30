@@ -9,7 +9,7 @@ header {
   background: rgb(17, 17, 17);
   padding: 20px;
   text-align: center;
-  color: rgb(25, 0, 255);
+  color: white;
   font-size: 30px;
   font-weight: 1000;
 }
@@ -17,7 +17,7 @@ header {
 p {
   text-align: center;
   font-size: 25px;
-  color: rgb(25, 0, 255);
+  color: white;
 }
 
 form {
