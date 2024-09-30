@@ -88,7 +88,7 @@ function App() {
       <header>
         Game Wishlist
       </header>
-      <p>Fill out ALL of the form before submitting data.</p>
+      <p>Put the discount as a whole number from 0-100.</p>
       <form id="wishlistForm" onSubmit={handleSubmit}>
         <input 
           type="text" 
