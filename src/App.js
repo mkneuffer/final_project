@@ -130,8 +130,8 @@ function App() {
           <tr>
             <th>Title</th>
             <th>Genre</th>
-            <th>Price</th>
-            <th>Discount</th>
+            <th>Total Price</th>
+            <th>Discount Percentage</th>
             <th>Discounted Price</th>
             <th>Actions</th>
           </tr>

@@ -18,6 +18,9 @@ p {
   text-align: center;
   font-size: 25px;
   color: white;
+  justify-content: left;
+  margin-top: 40px;
+  margin-bottom: 50px;
 }
 
 form {
@@ -35,6 +38,8 @@ input {
 
 button {
   margin-top: 10px;
+  justify-content: space-between;
+  margin-right: 5px;
   padding: 5px;
 }
 
