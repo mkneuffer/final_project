@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import Login from './Login';
 
 function App() {
     const [wishlistData, setWishlistData] = useState({
@@ -12,6 +13,7 @@ function App() {
   const [gameList, setGameList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     //Load game list on page render
     useEffect(() => {
@@ -83,75 +85,86 @@ function App() {
     setGameList(updatedList);
   };
 
+  const handleLogin = (status) => {
+    setIsLoggedIn(status);
+  }
+
+ 
   return (
     <div className="App">
-      <header>
-        Game Wishlist
-      </header>
-      <p>Put the discount as a whole number from 0-100.</p>
-      <form id="wishlistForm" onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          id="gameTitle" 
-          value={wishlistData.gameTitle} 
-          onChange={handleInputChange} 
-          placeholder="Game Title" 
-          required
-        />
-        <input 
-          type="text" 
-          id="genre" 
-          value={wishlistData.genre} 
-          onChange={handleInputChange} 
-          placeholder="Genre of your game" 
-          required
-        />
-        <input 
-          type="text" 
-          id="price" 
-          value={wishlistData.price} 
-          onChange={handleInputChange} 
-          placeholder="Full price of your game" 
-          required
-        />
-        <input 
-          type="text" 
-          id="currentDiscount" 
-          value={wishlistData.currentDiscount} 
-          onChange={handleInputChange} 
-          placeholder="Current discount of your game" 
-          required
-        />
-        <button type="submit">{isEditing ? 'Update' : 'Submit'}</button>
-      </form>
+      {isLoggedIn ? ( // Conditionally render login or wishlist page
+        <div>
+          <header>
+            Game Wishlist
+          </header>
+          <p>Fill out ALL of the form before submitting data.</p>
+          <form id="wishlistForm" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              id="gameTitle"
+              value={wishlistData.gameTitle}
+              onChange={handleInputChange}
+              placeholder="Game Title"
+              required
+            />
+            <input
+              type="text"
+              id="genre"
+              value={wishlistData.genre}
+              onChange={handleInputChange}
+              placeholder="Genre of your game"
+              required
+            />
+            <input
+              type="text"
+              id="price"
+              value={wishlistData.price}
+              onChange={handleInputChange}
+              placeholder="Full price of your game"
+              required
+            />
+            <input
+              type="text"
+              id="currentDiscount"
+              value={wishlistData.currentDiscount}
+              onChange={handleInputChange}
+              placeholder="Current discount of your game"
+              required
+            />
+            <button type="submit">{isEditing ? 'Update' : 'Submit'}</button>
+          </form>
 
-      <table id="wishlistTable">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Total Price</th>
-            <th>Discount Percentage</th>
-            <th>Discounted Price</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {gameList.map((wishlist, index) => (
-            <tr key={index}>
-              <td>{wishlist.gameTitle}</td>
-              <td>{wishlist.genre}</td>
-              <td>{wishlist.price}</td>
-              <td>{wishlist.currentDiscount}</td>
-              <td>{wishlist.discountedPrice}</td>
-              <td>
-                <button onClick={() => handleEdit(index)}>Edit</button>
-                <button onClick={() => handleDelete(index)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+          <table id="wishlistTable">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Discounted Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {gameList.map((wishlist, index) => (
+                <tr key={index}>
+                  <td>{wishlist.gameTitle}</td>
+                  <td>{wishlist.genre}</td>
+                  <td>{wishlist.price}</td>
+                  <td>{wishlist.currentDiscount}</td>
+                  <td>{wishlist.discountedPrice}</td>
+                  <td>
+                    <button onClick={() => handleEdit(index)}>Edit</button>
+                    <button onClick={() => handleDelete(index)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <Login onLogin={handleLogin} /> // Show Login if not logged in
+      )}
     </div>
   );
 }

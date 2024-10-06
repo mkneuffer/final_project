@@ -3,17 +3,24 @@ import React, {useState} from 'react';
 function Login({onLogin}) {
     const [loginInfo, setLoginInfo] = useState({username: '', password: ''});
 
-    const handleChange = (e) => {
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
+        setLoginInfo({
+          ...loginInfo,
+          [id]: value
+        });
+      };
+    
+      const handleSubmit = (e) => {
         e.preventDefault();
-        const {username, password} = loginInfo;
-
-        //hardcode user account for now
-        if(username === "test" && password === "tester123") {
-            onLogin(true);
+    
+        // Hardcoded login for now
+        if (loginInfo.username === 'test' && loginInfo.password === 'tester123') {
+          onLogin(true);
         } else {
-            alert("The username or password does not exist.");
+          alert('The username or password does not exist.');
         }
-    };
+      };
 
 return (
     <div>
@@ -21,18 +28,18 @@ return (
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="username"
+          id="username"
           placeholder="Username"
-          value={credentials.username}
-          onChange={handleChange}
+          value={loginInfo.username}
+          onChange={handleInputChange}
           required
         />
         <input
           type="password"
-          name="password"
+          id="password"
           placeholder="Password"
-          value={credentials.password}
-          onChange={handleChange}
+          value={loginInfo.password}
+          onChange={handleInputChange}
           required
         />
         <button type="submit">Login</button>
