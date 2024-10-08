@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 
+<<<<<<< Updated upstream
 function Login({onLogin}) {
     const [loginInfo, setLoginInfo] = useState({username: '', password: ''});
 
@@ -47,5 +48,21 @@ return (
     </div>
   );
 }
+=======
+function Login() {
+    const { loginWithRedirect } = useAuth0();
+    
+    const handleLogin = () => {
+      loginWithRedirect();
+    };
+  
+    return (
+      <div>
+        <h2>Login</h2>
+        <button onClick={handleLogin}>Login with Auth0</button>
+      </div>
+    );
+  }
+>>>>>>> Stashed changes
 
 export default Login;

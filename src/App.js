@@ -163,7 +163,7 @@ function App() {
           </table>
         </div>
       ) : (
-        <Login onLogin={handleLogin} /> // Show Login if not logged in
+        <Login onLogin={handleLogin(true)} /> // Show Login if not logged in
       )}
     </div>
   );
