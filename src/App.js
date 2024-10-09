@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Login from './Login';
+import { useAuth0 } from "@auth0/auth0-react";
+import serverCall from './index'
 
 function App() {
+  const { user, isAuthenticated, isLoading } = useAuth0();
     const [wishlistData, setWishlistData] = useState({
     gameTitle: '',
     genre: '',
@@ -14,6 +17,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
     //Load game list on page render
     useEffect(() => {
@@ -86,9 +90,12 @@ function App() {
   };
 
   const handleLogin = (status) => {
-    setIsLoggedIn(status);
+    if (isLoading) {
+      return <div>Loading...</div>
+    } else if (isAuthenticated) {
+      setIsLoggedIn(status);
+    }
   }
-
  
   return (
     <div className="App">
@@ -97,6 +104,12 @@ function App() {
           <header>
             Game Wishlist
           </header>
+          <p>
+            {user.name}
+          </p>
+          <p>
+            {user.email}
+          </p>
           <p>Fill out ALL of the form before submitting data.</p>
           <form id="wishlistForm" onSubmit={handleSubmit}>
             <input
@@ -133,6 +146,8 @@ function App() {
             />
             <button type="submit">{isEditing ? 'Update' : 'Submit'}</button>
           </form>
+
+          <button onClick={serverCall}>Call server</button>
 
           <table id="wishlistTable">
             <thead>
