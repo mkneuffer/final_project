@@ -1,5 +1,5 @@
 # Final Project - Team 4
-Thomas Oleary, James Cannon, Justin Smith, Matthew Neuffer, Ash Kittur
+Thomas O'Leary, James Cannon, Justin Smith, Matthew Neuffer, Ash Kittur
 
 ## General Description
 
