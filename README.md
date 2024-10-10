@@ -32,7 +32,7 @@ With the game database, we also ran into an issue with roughly 10,000 repeated g
 
 - Ash: Researched React/Express integration, wrote documentation.
 
-Link to video: [[Zoom recording]](https://youtu.be/W1Zm4DcxApA)
+Link to video: https://youtu.be/W1Zm4DcxApA
 
 Link to deployed web app: https://webware-videogamecatalog.glitch.me/
 
