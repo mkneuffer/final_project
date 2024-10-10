@@ -1,0 +1,75 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Wishlist</title>
+    <link rel="stylesheet" href="/wishlist.css" />
+  </head>
+  <body>
+    <header>
+      <h1>{{username}}'s Wishlist</h1>
+      <nav>
+        <a id="back" href="/">Back to Game List</a>
+        <a href="/logout" class="logout-button">Logout</a>
+      </nav>
+    </header>
+    <form action="/wishlist/search" method="POST">
+      <input type="text" name="searchQuery" placeholder="Search games..." />
+      <button type="submit">Search</button>
+    </form>
+
+    {{#if games}}
+      <h2>Search Results:</h2>
+      <div class="game-grid">
+        {{#each games}}
+          <div class="game-card">
+            <img src="{{img_url}}" alt="{{name}}" />
+            <h2>{{name}}</h2>
+            <a href="/game/{{_id}}">View Details</a>
+            <form action="/wishlist/add/{{_id}}" method="POST">
+              <button type="submit">Add to Wishlist</button>
+            </form>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+
+    <h2>Your Wishlist:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Game Name</th>
+          <th>Release Date</th>
+          <th>Price</th>
+          <th>Developer</th>
+          <th>Publisher</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each wishlistItems}}
+          <tr>
+            <td><img
+                src="{{img_url}}"
+                alt="{{name}}"
+                style="width: 200px;"
+              /></td>
+            <td>{{name}}</td>
+            <td>{{date}}</td>
+            <td>${{price}}</td>
+            <td>{{developer}}</td>
+            <td>{{publisher}}</td>
+            <td>
+              <a href="/game/{{_id}}">View Game</a>
+              <form action="/wishlist/remove/{{_id}}" method="POST">
+                <button type="submit">Remove</button>
+              </form>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+  </body>
+</html>

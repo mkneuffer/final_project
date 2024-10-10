@@ -20,7 +20,6 @@ The website's goal is to operate as a Game Wishlist. The idea is for users to st
 - **Feature 2**: Each user will have access to their own personal list of desired games.
 - **Feature 3**: Users can view the wishlists of other users.
 
-
 These features will serve as the primary focus areas for development and will guide the design and functionality of the project.
 
 ## Technologies and Libraries

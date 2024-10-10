@@ -1,7 +1,7 @@
 # Final Project - Team 4
-Thomas O'Leary, James
+Thomas Oleary, James Cannon, Justin Smith, Matthew Neuffer, Ash Kittur
 
-## General description
+## General Description
 
 Our application is a video game catalogue. Upon visiting, a user will be welcomed with a login page. They can choose to login with auth0 or a normal username and password. Then, they will be taken to the list of games. This list of games accesses a large database of games from Steam. Clicking on any game's card to view its details will do so. On each game, users can leave reviews and ratings which will be persistent and save themselves in our MongoDB database.
 A user can click on a button to add the currently visited game to their wishlist. When they return to the game list, they can return to their wishlist. Their wishlist will store data about their different wishlisted games. They can also search for games above their wishlist in a search bar. This will allow them to add any game in our database they want to their wishlist.
