@@ -1,5 +1,5 @@
 # Final Project - Team 4
-Thomas Oleray, James
+Thomas O'Leary, James
 
 ## General description
 
