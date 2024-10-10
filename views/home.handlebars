@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game List</title>
+    <link rel="stylesheet" href="/home.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{username}}</h1>
+        <nav>
+            <a id="goto" href="/wishlist">Go to Wishlist</a>
+            <a href="/logout" class="logout-button">Logout</a>
+        </nav>
+    </header>
+    <div class="game-grid">
+        {{#each games}}
+            <div class="game-card">
+                <img src="{{img_url}}" alt="{{name}}">
+                <h2>{{name}}</h2>
+                <a href="/game/{{_id}}">View Details</a>
+            </div>
+        {{/each}}
+    </div>
+    {{#if loadMore}}
+        <button id="loadMoreButton" data-next-offset="{{nextOffset}}">Load More</button>
+    {{/if}}
+    <script>
+        document.getElementById("loadMoreButton")?.addEventListener("click", async function() {
+            const button = this;
+            const offset = button.getAttribute("data-next-offset");
+            const response = await fetch(`/?offset=${offset}`);
+            const text = await response.text();
+            const parser = new DOMParser();
+            const newDoc = parser.parseFromString(text, "text/html");
+            const newGames = newDoc.querySelector(".game-grid").innerHTML;
+            button.previousElementSibling.innerHTML += newGames;    
+            const newLoadMoreButton = newDoc.getElementById("loadMoreButton");
+            if (newLoadMoreButton) {
+                button.setAttribute("data-next-offset", newLoadMoreButton.getAttribute("data-next-offset"));
+            } else {
+                button.remove();
+            }
+        });
+    </script>
+</body>
+</html>

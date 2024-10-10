@@ -1,0 +1,78 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{game.name}}</title>
+    <link rel="stylesheet" href="/game.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a class="back-button" href="/">Back to Game List</a>
+        <a class="back-button" href="/wishlist">Back to Wishlist</a>
+        <a href="/logout" class="logout-button">Logout</a>
+      </nav>
+    </header>
+    <div class="container">
+      <h1 class="game-title">{{game.name}}</h1>
+      <img class="game-image" src="{{game.img_url}}" alt="{{game.name}}" />
+      <div class="description">
+        <strong>About This Game:</strong>
+        {{game.full_desc.desc}}
+      </div>
+
+      <form
+        class="add-button"
+        action="/game/{{game._id}}/add-to-wishlist"
+        method="POST"
+      >
+        <button type="submit">Add to Wishlist</button>
+      </form>
+
+      <h2>Reviews</h2>
+      <div class="reviews">
+        {{#each reviews}}
+          <div class="review">
+            <p><strong>{{this.username}}</strong>
+              (Rating:
+              {{this.rating}}/5)</p>
+            <p>{{this.content}}</p>
+          </div>
+        {{/each}}
+      </div>
+
+      <form
+        class="review-form"
+        action="/game/{{game._id}}/add-review"
+        method="POST"
+      >
+        <div class="rating">
+          <span class="star" data-value="1">★</span>
+          <span class="star" data-value="2">★</span>
+          <span class="star" data-value="3">★</span>
+          <span class="star" data-value="4">★</span>
+          <span class="star" data-value="5">★</span>
+        </div>
+        <input type="hidden" name="rating" id="rating" required />
+
+        <textarea
+          name="reviewContent"
+          required
+          placeholder="Write your review here..."
+          class="review-textarea"
+        ></textarea>
+        <button type="submit" class="submit-button">Submit Review</button>
+      </form>
+    </div>
+
+    <script>
+
+      const stars = document.querySelectorAll('.star'); const ratingInput =
+      document.getElementById('rating'); stars.forEach(star => {
+      star.addEventListener('click', () => { const value =
+      star.getAttribute('data-value'); ratingInput.value = value;
+      stars.forEach(s => s.classList.remove('selected')); for (let i = 0; i <
+      value; i++) { stars[i].classList.add('selected'); } }); });
+    </script>
+  </body>
+</html>
