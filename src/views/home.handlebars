@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game List</title>
+    <link rel="stylesheet" href="/home.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Game List</h1>
+        <div class="game-grid">
+            {{#each games}}
+            <div class="game-card">
+                <img src="{{this.img_url}}" alt="{{this.name}}">
+                <h2>{{this.name}}</h2>
+                <a href="/game/{{this._id}}" class="view-details">View Details</a>
+            </div>
+            {{/each}}
+        </div>
+        <button id="loadMore" class="load-more">Load More</button>
+    </div>
+
+    <script>
+        
+        let offset = 50; 
+        const limit = 50; 
+        
+        document.getElementById("loadMore").addEventListener("click", async () => {
+            const response = await fetch(`/games?offset=${offset}&limit=${limit}`);
+            const games = await response.json();
+
+            if (games.length > 0) {
+                const gameGrid = document.querySelector('.game-grid');
+                games.forEach(game => {
+                    const gameCard = document.createElement('div');
+                    gameCard.className = 'game-card';
+                    gameCard.innerHTML = `
+                        <img src="${game.img_url}" alt="${game.name}">
+                        <h2>${game.name}</h2>
+                        <a href="/game/${game._id}">View Details</a>
+                    `;
+                    gameGrid.appendChild(gameCard);
+                });
+                offset += limit; 
+            } else {
+                
+                document.getElementById("loadMore").style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+</html>
