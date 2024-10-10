@@ -23,6 +23,7 @@ Some challenges that we faced were integrating programs that used React.js and E
 
 
 Link to video: [Zoom recording]
+
 Link to deployed web app: [Glitch link]
 
 
